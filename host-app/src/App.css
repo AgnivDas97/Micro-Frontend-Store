@@ -1,0 +1,320 @@
+/* Reset and Base Styles */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+/* Desktop */
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 40px); /* Subtract taskbar height */
+  background-color: #008080; /* Windows 95 Teal */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Grid layout for Desktop Shortcuts */
+.desktop-shortcuts {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 1;
+}
+
+/* Single Shortcut */
+.desktop-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 76px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.shortcut-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+  filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
+}
+
+.shortcut-label {
+  color: #ffffff;
+  font-size: 11px;
+  text-shadow: 1px 1px 1px #000;
+  padding: 2px 4px;
+  border: 1px dashed transparent;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.desktop-shortcut:hover .shortcut-label {
+  background-color: rgba(0, 0, 128, 0.5);
+  border-color: #ffff00;
+}
+
+/* Windows 95 Style Window Frame */
+.win95-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff; /* Bevel raised */
+  box-shadow: 1px 1px 0px #000, inset 1px 1px 0px #fff;
+  box-sizing: border-box;
+  min-width: 250px;
+  min-height: 180px;
+}
+
+.win95-window.active {
+  z-index: 10;
+}
+
+/* Window Title Bar */
+.win95-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 4px 4px 4px;
+  height: 18px;
+  background: linear-gradient(90deg, #000080, #1084d0); /* Classic active blue gradient */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: move;
+}
+
+.win95-window:not(.active) .win95-title-bar {
+  background: #808080; /* Inactive grey */
+  color: #c0c0c0;
+}
+
+.win95-title-bar-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-bar-icon {
+  font-size: 13px;
+}
+
+.win95-title-bar-controls {
+  display: flex;
+  gap: 2px;
+}
+
+/* Window Buttons */
+.win95-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 14px;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: bold;
+  background-color: #c0c0c0;
+  color: #000000;
+  border: 1px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.win95-btn:active {
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 1px 0 0 1px;
+}
+
+/* Window Body Content Area */
+.win95-window-body {
+  flex: 1;
+  margin: 4px;
+  padding: 2px;
+  overflow: hidden;
+  background-color: #c0c0c0;
+  box-sizing: border-box;
+}
+
+/* Custom Resize Handle */
+.win95-resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  cursor: se-resize;
+  background-image: linear-gradient(135deg, transparent 30%, #808080 30%, #808080 40%, transparent 40%, transparent 60%, #808080 60%, #808080 70%, transparent 70%, transparent 90%, #808080 90%);
+  background-size: 4px 4px;
+  z-index: 10;
+}
+
+/* Taskbar */
+.win95-taskbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 40px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  box-shadow: 0 -1px 0 #808080;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 6px;
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+/* Start Button */
+.win95-start-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  height: 28px;
+  background-color: #c0c0c0;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  cursor: pointer;
+}
+
+.win95-start-btn.open {
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 3px 7px 1px 9px;
+}
+
+.start-logo {
+  font-size: 15px;
+}
+
+/* Taskbar Items */
+.win95-taskbar-items {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  height: 28px;
+  overflow-x: auto;
+}
+
+.win95-taskbar-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 120px;
+  padding: 2px 6px;
+  background-color: #c0c0c0;
+  font-size: 11px;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.win95-taskbar-item.active {
+  border-color: #808080 #ffffff #ffffff #808080;
+  background-color: #dfdfdf;
+  font-weight: bold;
+  padding: 3px 5px 1px 7px;
+}
+
+/* System Tray */
+.win95-systray {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 8px;
+  height: 26px;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080; /* Sunken */
+  font-size: 11px;
+}
+
+.systray-icons {
+  display: flex;
+  gap: 4px;
+}
+
+/* Start Menu Popup */
+.win95-start-menu {
+  position: absolute;
+  left: 2px;
+  bottom: 42px;
+  width: 180px;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  display: flex;
+  z-index: 1000;
+}
+
+.start-menu-sidebar {
+  width: 24px;
+  background: linear-gradient(180deg, #000080, #1084d0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+.start-menu-sidebar span {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-family: Impact, sans-serif;
+}
+
+.start-menu-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.start-menu-item:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.start-menu-divider {
+  height: 1px;
+  background-color: #808080;
+  border-bottom: 1px solid #ffffff;
+  margin: 4px 2px;
+}
