@@ -8,24 +8,29 @@ export default defineConfig({
     tailwindcss(),
     react(),
     federation({
-      name: 'host_app',
-      remotes: {
-        remoteApp: 'http://localhost:5001/assets/remoteEntry.js',
-        authApp: 'http://localhost:5002/assets/remoteEntry.js',
+      name: 'auth_app',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './LoginPage': './src/components/LoginPage.jsx',
+        './UserProfileModal': './src/components/UserProfileModal.jsx',
+        './authSlice': './src/store/authSlice.js',
       },
       shared: ['react', 'react-dom', 'react-router-dom', '@reduxjs/toolkit', 'react-redux'],
     }),
   ],
   build: {
+    modulePreload: false,
     target: 'esnext',
+    minify: false,
+    cssCodeSplit: false,
   },
   server: {
-    port: 5000,
+    port: 5002,
     strictPort: true,
     cors: true,
   },
   preview: {
-    port: 5000,
+    port: 5002,
     strictPort: true,
     cors: true,
   }

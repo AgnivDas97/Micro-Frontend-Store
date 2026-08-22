@@ -14,36 +14,36 @@ A modern, high-performance E-Commerce application built using **Micro Frontend A
 
 This repository demonstrates a production-ready **Micro Frontend (MFE)** pattern splitting an e-commerce platform into independently composable applications:
 
-- 🏠 **Host Application (`host-app`)**: Container shell running on `http://localhost:5000`. Handles primary navigation, home page, product catalog, orders management, and dynamically loads the remote cart MFE.
+- 🏠 **Host Application (`host-app`)**: Container shell running on `http://localhost:5000`. Handles primary navigation, home page, product catalog, orders management, dynamic remote cart loading, and auth status integration.
 - 🛍️ **Remote Cart Application (`remote-app`)**: Independent Micro Frontend running on `http://localhost:5001`. Exposes the full interactive Shopping Cart page (`./CartPage`) and cart state logic (`./cartSlice`) via **Vite Module Federation**.
+- 🔐 **Remote Auth Application (`auth-app`)**: Independent Micro Frontend running on `http://localhost:5002`. Exposes the authentication login view (`./LoginPage`), user profile modal (`./UserProfileModal`), and auth state management (`./authSlice`).
 
 ---
 
 ## 🏗️ Architecture & Module Federation
 
 ```
-┌────────────────────────────────────────────────────────┐
-│               HOST APP (Port 5000)                     │
-│  ┌────────────┐  ┌─────────────┐  ┌─────────────────┐ │
-│  │ Navigation │  │  Products   │  │  Orders Page    │ │
-│  └────────────┘  └─────────────┘  └─────────────────┘ │
-│                          │                             │
-│       Dynamic Import     ▼ (http://localhost:5001)     │
-│       ┌──────────────────────────────────────┐        │
-│       │  <Suspense> Remote Cart Component    │        │
-│       └──────────────────────────────────────┘        │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           │ Loads remoteEntry.js
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│              REMOTE APP (Port 5001)                    │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │ Exposed Modules:                                 │  │
-│  │  - ./CartPage (Interactive Shopping Cart & Modal)│  │
-│  │  - ./cartSlice (Redux Cart Management)           │  │
-│  └──────────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                      HOST APP (Port 5000)                              │
+│  ┌────────────┐  ┌─────────────┐  ┌─────────────┐  ┌────────────────┐  │
+│  │ Navigation │  │  Products   │  │ Orders Page │  │ Auth Indicator │  │
+│  └────────────┘  └─────────────┘  └─────────────┘  └────────────────┘  │
+│         │                                                 │            │
+│         ▼ (http://localhost:5001)                         ▼ (5002)     │
+│  ┌──────────────────────────────┐              ┌────────────────────┐ │
+│  │ <Suspense> Remote Cart MFE   │              │ Remote Auth MFE    │ │
+│  └──────────────────────────────┘              └────────────────────┘ │
+└─────────┬─────────────────────────────────────────────────┬────────────┘
+          │                                                 │
+          │ remoteEntry.js                                  │ remoteEntry.js
+          ▼                                                 ▼
+┌──────────────────────────────┐         ┌──────────────────────────────┐
+│    REMOTE CART (Port 5001)   │         │    REMOTE AUTH (Port 5002)   │
+│ Exposed:                     │         │ Exposed:                     │
+│  - ./CartPage                │         │  - ./LoginPage               │
+│  - ./cartSlice               │         │  - ./UserProfileModal        │
+│                              │         │  - ./authSlice               │
+└──────────────────────────────┘         └──────────────────────────────┘
 ```
 
 ---

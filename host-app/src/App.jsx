@@ -32,6 +32,30 @@ const RemoteCartPage = lazy(() =>
   })
 );
 
+// Lazy load remote Auth component from authApp MFE
+const RemoteLoginPage = lazy(() =>
+  import('authApp/LoginPage').catch((err) => {
+    console.error('Failed to load remote LoginPage MFE:', err);
+    return {
+      default: () => (
+        <div className="text-center py-20 bg-slate-900/50 rounded-3xl border border-rose-500/30 max-w-xl mx-auto my-12 p-8">
+          <AlertCircle className="w-12 h-12 text-rose-400 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-white mb-2">Remote Auth Micro Frontend Unavailable</h2>
+          <p className="text-slate-400 text-xs mb-6">
+            Make sure the Auth App is running on <code className="text-indigo-400">http://localhost:5002</code> and built with Vite federation.
+          </p>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs"
+          >
+            Return to Front Page
+          </a>
+        </div>
+      )
+    };
+  })
+);
+
 export default function App() {
   const dispatch = useDispatch();
 
@@ -66,6 +90,23 @@ export default function App() {
               }
             />
             <Route path="/orders" element={<OrdersPage />} />
+            <Route
+              path="/auth"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                      <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                      <p className="text-sm font-semibold text-slate-400 flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-indigo-400 animate-bounce" /> Loading Remote Auth Micro Frontend...
+                      </p>
+                    </div>
+                  }
+                >
+                  <RemoteLoginPage />
+                </Suspense>
+              }
+            />
           </Routes>
         </main>
       </div>

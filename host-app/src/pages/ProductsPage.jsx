@@ -177,14 +177,7 @@ export default function ProductsPage() {
 
       {/* Loading Skeleton State */}
       {status === 'loading' && (
-        <div
-          className="grid gap-6"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1.5rem'
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <div key={n} className="bg-slate-900/40 border border-slate-800 rounded-3xl p-5 h-96 animate-pulse" />
           ))}
@@ -223,14 +216,7 @@ export default function ProductsPage() {
       )}
 
       {status === 'succeeded' && displayProducts.length > 0 && (
-        <div
-          className="grid gap-6"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1.5rem'
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {displayProducts.map((product) => (
             <div
               key={product.id}
@@ -315,7 +301,7 @@ export default function ProductsPage() {
       {/* Product Details Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-[95%] sm:w-full p-4 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-lg bg-slate-800/50"

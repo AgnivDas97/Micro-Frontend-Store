@@ -59,36 +59,36 @@ export default function HomePage() {
             <Globe className="w-4 h-4 text-indigo-400" /> Powered by DummyJSON Live Product API
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-none">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight sm:leading-none">
             Live Product Marketplace <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Micro Frontend Store
             </span>
           </h1>
 
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-            Discover thousands of live products fetched dynamically from <code className="text-indigo-300 font-mono text-sm bg-slate-900 px-2 py-0.5 rounded border border-slate-800">dummyjson.com/products</code>, integrated seamlessly across Host and Remote Micro Frontend apps!
+          <p className="text-slate-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
+            Discover thousands of live products fetched dynamically from <code className="text-indigo-300 font-mono text-xs sm:text-sm bg-slate-900 px-2 py-0.5 rounded border border-slate-800">dummyjson.com/products</code>, integrated seamlessly across Host and Remote Micro Frontend apps!
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4">
             <NavLink
               to="/products"
-              className="bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2 text-base"
+              className="w-full sm:w-auto justify-center bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base"
             >
               Explore Live API Products <ArrowRight className="w-5 h-5" />
             </NavLink>
 
             <NavLink
               to="/cart"
-              className="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold px-8 py-4 rounded-2xl transition-all flex items-center gap-2 text-base backdrop-blur-md"
+              className="w-full sm:w-auto justify-center bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl transition-all flex items-center gap-2 text-sm sm:text-base backdrop-blur-md"
             >
               <ShoppingBag className="w-5 h-5 text-indigo-400" /> View Remote Cart MFE
             </NavLink>
           </div>
 
           {/* Feature Pill Matrix */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-8 sm:pt-10">
             {[
               { icon: Globe, title: 'DummyJSON API', desc: 'Real-time REST endpoints' },
               { icon: Cpu, title: 'Vite Federation', desc: 'Host & Remote MFE' },
@@ -99,9 +99,9 @@ export default function HomePage() {
                 key={idx}
                 className="bg-slate-900/40 border border-slate-800/80 p-4 rounded-2xl text-left backdrop-blur-sm"
               >
-                <item.icon className="w-6 h-6 text-indigo-400 mb-2" />
-                <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                <p className="text-xs text-slate-500 mt-0.5">{item.desc}</p>
+                <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 mb-2" />
+                <h4 className="text-xs sm:text-sm font-bold text-white">{item.title}</h4>
+                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -110,43 +110,29 @@ export default function HomePage() {
 
       {/* Live Featured Products Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8 border-b border-slate-800 pb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-2 mb-8 border-b border-slate-800 pb-4">
           <div>
             <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5 mb-1">
               <Sparkles className="w-3.5 h-3.5" /> Live REST API Data
             </span>
-            <h2 className="text-3xl font-extrabold text-white">Trending API Products</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Trending API Products</h2>
           </div>
           <NavLink
             to="/products"
-            className="text-sm font-bold text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
           >
             View All Catalog <ArrowRight className="w-4 h-4" />
           </NavLink>
         </div>
 
         {status === 'loading' ? (
-          <div
-            className="grid gap-6"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '1.5rem'
-            }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((n) => (
               <div key={n} className="bg-slate-900/40 border border-slate-800 rounded-3xl p-5 h-80 animate-pulse" />
             ))}
           </div>
         ) : (
-          <div
-            className="grid gap-6"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '1.5rem'
-            }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProducts.map((product) => (
               <div
                 key={product.id}
