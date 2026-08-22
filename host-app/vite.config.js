@@ -10,8 +10,8 @@ export default defineConfig({
     federation({
       name: 'host_app',
       remotes: {
-        remoteApp: 'http://localhost:5001/assets/remoteEntry.js',
-        authApp: 'http://localhost:5002/assets/remoteEntry.js',
+        remoteApp: process.env.VITE_REMOTE_APP_URL || 'http://localhost:5001/assets/remoteEntry.js',
+        authApp: process.env.VITE_AUTH_APP_URL || 'http://localhost:5002/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom', 'react-router-dom', '@reduxjs/toolkit', 'react-redux'],
     }),
