@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-and-build:
-    name: Test and Build Micro Frontends
+  test:
+    name: Test Micro Frontends
     runs-on: ubuntu-latest
 
     steps:
@@ -21,29 +21,64 @@ jobs:
         with:
           node-version: 20
 
-      - name: Test & Build Auth App
+      - name: Test Auth App
         run: |
-          echo "Starting testing for Auth App..."
+          echo "Running tests & linting for Auth App..."
+          cd auth-app
+          npm install
+          npm run lint
+
+      - name: Test Remote App
+        run: |
+          echo "Running tests & linting for Remote App..."
+          cd remote-app
+          npm install
+          npm run lint
+
+      - name: Test Host App
+        run: |
+          echo "Running tests & linting for Host App..."
+          cd host-app
+          npm install
+          npm run lint
+
+  build:
+    name: Build Micro Frontends
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Auth App
+        run: |
+          echo "Building Auth App..."
           cd auth-app
           npm install
           npm run build
           echo "Auth App build completed successfully."
 
-      - name: Test & Build Remote App
+      - name: Build Remote App
         run: |
-          echo "Starting testing for Remote App..."
+          echo "Building Remote App..."
           cd remote-app
           npm install
           npm run build
           echo "Remote App build completed successfully."
 
-      - name: Test & Build Host App
+      - name: Build Host App
         run: |
-          echo "Starting testing for Host App..."
+          echo "Building Host App..."
           cd host-app
           npm install
           npm run build
           echo "Host App build completed successfully."
 
       - name: Final Verification
-        run: echo "All micro-frontend automated tests and builds passed successfully!"
+        run: echo "All micro-frontend tests and builds completed successfully!"
