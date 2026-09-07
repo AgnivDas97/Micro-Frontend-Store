@@ -1,0 +1,10 @@
+name: frontend workflow
+on: workflow_dispatch
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello github action
+        run: echo "hello this is my frinst workflow in github action"
+      - name: bye github action
+        run: echo "bye github action"
