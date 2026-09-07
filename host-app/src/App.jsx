@@ -64,7 +64,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#1e212d] text-[#E5EAF5] font-sans flex flex-col justify-between selection:bg-[#8458B3] selection:text-white">
       <div>
         <Navbar />
 
@@ -78,9 +78,9 @@ export default function App() {
                 <Suspense
                   fallback={
                     <div className="flex flex-col items-center justify-center py-32 space-y-4">
-                      <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                      <p className="text-sm font-semibold text-slate-400 flex items-center gap-2">
-                        <ShoppingBag className="w-4 h-4 text-indigo-400 animate-bounce" /> Loading Remote Cart Micro Frontend...
+                      <div className="w-12 h-12 border-4 border-[#8458B3] border-t-transparent rounded-full animate-spin" />
+                      <p className="text-sm font-semibold text-[#D0BDF4] flex items-center gap-2">
+                        <ShoppingBag className="w-4 h-4 text-[#A0D2EB] animate-bounce" /> Loading Remote Cart Micro Frontend...
                       </p>
                     </div>
                   }
@@ -96,9 +96,9 @@ export default function App() {
                 <Suspense
                   fallback={
                     <div className="flex flex-col items-center justify-center py-32 space-y-4">
-                      <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                      <p className="text-sm font-semibold text-slate-400 flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-indigo-400 animate-bounce" /> Loading Remote Auth Micro Frontend...
+                      <div className="w-12 h-12 border-4 border-[#8458B3] border-t-transparent rounded-full animate-spin" />
+                      <p className="text-sm font-semibold text-[#D0BDF4] flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-[#A0D2EB] animate-bounce" /> Loading Remote Auth Micro Frontend...
                       </p>
                     </div>
                   }
@@ -112,10 +112,10 @@ export default function App() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
+      <footer className="border-t border-[#D0BDF4]/20 bg-[#494D5F]/80 py-8 px-4 text-center text-xs text-[#E5EAF5]/70 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-indigo-400" />
+            <Layers className="w-4 h-4 text-[#A0D2EB]" />
             <span>Micro Frontend Architecture &bull; Vite + React + Redux Toolkit</span>
           </div>
           <p>&copy; {new Date().getFullYear()} NEOSTORE Micro Frontend Inc. All rights reserved.</p>

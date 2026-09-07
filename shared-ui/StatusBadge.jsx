@@ -1,20 +1,20 @@
 import React from 'react';
 
-export default function StatusBadge({ label, variant = 'indigo', icon: Icon }) {
+export default function StatusBadge({ label, variant = 'purple', icon: Icon }) {
   const variantStyles = {
-    indigo: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
-    emerald: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-    purple: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-    amber: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-    rose: 'bg-rose-500/15 text-rose-300 border-rose-500/30',
+    purple: 'bg-[#8458B3]/20 text-[#D0BDF4] border-[#8458B3]/40',
+    sky: 'bg-[#A0D2EB]/20 text-[#A0D2EB] border-[#A0D2EB]/40',
+    lavender: 'bg-[#D0BDF4]/20 text-[#E5EAF5] border-[#D0BDF4]/40',
+    dark: 'bg-[#494D5F] text-[#E5EAF5] border-[#D0BDF4]/20',
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${variantStyles[variant] || variantStyles.indigo}`}
+      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${variantStyles[variant] || variantStyles.purple}`}
     >
       {Icon && <Icon className="w-3.5 h-3.5" />}
       <span>{label}</span>
     </span>
   );
 }
+

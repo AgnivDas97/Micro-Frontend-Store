@@ -1,19 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
+
+  --color-sky-blue: #A0D2EB;
+  --color-pale-white: #E5EAF5;
+  --color-lavender: #D0BDF4;
+  --color-violet-purple: #8458B3;
+  --color-dark-slate: #494D5F;
+  --color-page-bg: #141622;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: 'Outfit', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #020617;
-  color: #f8fafc;
+  background-color: #141622;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(132, 88, 179, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(160, 210, 235, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(208, 189, 244, 0.05) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: #E5EAF5;
   overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #141622;
+}
+::-webkit-scrollbar-thumb {
+  background: #494D5F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8458B3;
+}
+
+/* Clean E-Commerce Card Utility */
+.clean-card {
+  background-color: rgba(32, 36, 51, 0.9);
+  border: 1px solid rgba(208, 189, 244, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clean-card:hover {
+  border-color: rgba(160, 210, 235, 0.5);
+  box-shadow: 0 14px 35px -10px rgba(132, 88, 179, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Gradient Primary Button */
+.btn-gradient {
+  background: linear-gradient(135deg, #8458B3 0%, #6e429d 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(132, 88, 179, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #9464c7 0%, #7d4dae 100%);
+  box-shadow: 0 6px 22px rgba(132, 88, 179, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Gradient Shimmer Text */
+.gradient-text {
+  background: linear-gradient(135deg, #A0D2EB 0%, #E5EAF5 40%, #D0BDF4 70%, #8458B3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Snap Helper Utilities */
+.bg-snap-dark { background-color: #494D5F; }
+.bg-snap-purple { background-color: #8458B3; }
+.bg-snap-lavender { background-color: #D0BDF4; }
+.bg-snap-sky { background-color: #A0D2EB; }
+.bg-snap-pale { background-color: #E5EAF5; }
+.bg-snap-page { background-color: #141622; }
+
+.text-snap-dark { color: #494D5F; }
+.text-snap-purple { color: #8458B3; }
+.text-snap-lavender { color: #D0BDF4; }
+.text-snap-sky { color: #A0D2EB; }
+.text-snap-pale { color: #E5EAF5; }
+
+
+h1, h2, h3, h4, .font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #171923;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(132, 88, 179, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(160, 210, 235, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(208, 189, 244, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: #E5EAF5;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #171923;
+}
+::-webkit-scrollbar-thumb {
+  background: #494D5F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8458B3;
+}
+
+/* Custom Keyframes Animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes shimmerSweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(132, 88, 179, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(160, 210, 235, 0.5); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-shimmer-text {
+  background: linear-gradient(90deg, #A0D2EB 0%, #E5EAF5 25%, #D0BDF4 50%, #8458B3 75%, #A0D2EB 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmerSweep 6s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glassmorphism Bento Card Utility */
+.bento-card {
+  background: rgba(73, 77, 95, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(208, 189, 244, 0.2);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  background: rgba(73, 77, 95, 0.9);
+  border-color: rgba(132, 88, 179, 0.6);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px -15px rgba(132, 88, 179, 0.25);
+}
+
+/* Snap Color Utility Helper Classes */
+.bg-snap-dark { background-color: #494D5F; }
+.bg-snap-purple { background-color: #8458B3; }
+.bg-snap-lavender { background-color: #D0BDF4; }
+.bg-snap-sky { background-color: #A0D2EB; }
+.bg-snap-pale { background-color: #E5EAF5; }
+.bg-snap-page { background-color: #171923; }
+
+.text-snap-dark { color: #494D5F; }
+.text-snap-purple { color: #8458B3; }
+.text-snap-lavender { color: #D0BDF4; }
+.text-snap-sky { color: #A0D2EB; }
+.text-snap-pale { color: #E5EAF5; }
+
+.border-snap-dark { border-color: #494D5F; }
+.border-snap-purple { border-color: #8458B3; }
+.border-snap-lavender { border-color: #D0BDF4; }
+.border-snap-sky { border-color: #A0D2EB; }
+
+

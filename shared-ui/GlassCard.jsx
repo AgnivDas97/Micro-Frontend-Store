@@ -1,18 +1,19 @@
 import React from 'react';
 
-export default function GlassCard({ children, className = '', glowColor = 'indigo' }) {
+export default function GlassCard({ children, className = '', glowColor = 'purple' }) {
   const glowStyles = {
-    indigo: 'border-indigo-500/30 shadow-indigo-500/10 hover:border-indigo-500/50',
-    purple: 'border-purple-500/30 shadow-purple-500/10 hover:border-purple-500/50',
-    emerald: 'border-emerald-500/30 shadow-emerald-500/10 hover:border-emerald-500/50',
-    rose: 'border-rose-500/30 shadow-rose-500/10 hover:border-rose-500/50',
+    purple: 'border-[#D0BDF4]/30 shadow-[#8458B3]/20 hover:border-[#A0D2EB]/60',
+    sky: 'border-[#A0D2EB]/30 shadow-[#A0D2EB]/20 hover:border-[#A0D2EB]/60',
+    lavender: 'border-[#D0BDF4]/40 shadow-[#D0BDF4]/20 hover:border-[#D0BDF4]/70',
+    dark: 'border-[#494D5F] shadow-[#494D5F]/30 hover:border-[#8458B3]/50',
   };
 
   return (
     <div
-      className={`bg-slate-900/70 border backdrop-blur-xl rounded-3xl p-6 shadow-xl transition-all duration-300 ${glowStyles[glowColor] || glowStyles.indigo} ${className}`}
+      className={`clean-card rounded-3xl p-6 shadow-xl text-[#E5EAF5] ${glowStyles[glowColor] || glowStyles.purple} ${className}`}
     >
       {children}
     </div>
   );
 }
+
