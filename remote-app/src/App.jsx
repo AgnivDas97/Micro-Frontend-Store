@@ -1,4 +1,3 @@
-import React from 'react';
 import CartPage from './components/CartPage.jsx';
 
 function App() {

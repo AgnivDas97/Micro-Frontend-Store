@@ -1,4 +1,3 @@
-import React from 'react';
 import LoginPage from './components/LoginPage.jsx';
 import { ShieldCheck, Layers } from 'lucide-react';
 

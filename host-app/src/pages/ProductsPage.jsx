@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../remote-app/src/store/cartSlice.js';
 import {
@@ -17,9 +17,7 @@ import {
   Sparkles,
   Info,
   RefreshCw,
-  Tag,
-  ShieldAlert,
-  Truck
+  ShieldAlert
 } from 'lucide-react';
 
 export default function ProductsPage() {

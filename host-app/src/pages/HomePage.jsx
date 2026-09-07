@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../../remote-app/src/store/cartSlice.js';
@@ -12,7 +12,6 @@ import {
   Truck,
   RotateCcw,
   Star,
-  Layers,
   Cpu,
   Globe
 } from 'lucide-react';

@@ -1,7 +1,6 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, updateUserProfile } from '../store/authSlice.js';
-import { X, ShieldCheck, LogOut, Award, User, Mail, Sparkles, CheckCircle2, Zap } from 'lucide-react';
+import { logout } from '../store/authSlice.js';
+import { X, LogOut, Award, User, Mail, CheckCircle2, Zap } from 'lucide-react';
 
 export default function UserProfileModal({ isOpen, onClose }) {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logout } from '../store/authSlice.js';
 import { ShieldCheck, LogIn, LogOut, User, Lock, Mail, Sparkles, CheckCircle2, KeyRound } from 'lucide-react';
