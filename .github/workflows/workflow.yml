@@ -1,12 +1,13 @@
 name: CI & Automated Testing Workflow
 
-on:
+#"on" tells GitHub when the workflow should run. #These are all GitHub Actions triggers
+on: 
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-  workflow_run:
+  workflow_dispatch: #GitHub asks you for the environment when you manually run it
+  workflow_run: #Run this workflow after another GitHub Actions workflow finishes.
     workflows: ["frontend workflow"]
     types:
       - completed
