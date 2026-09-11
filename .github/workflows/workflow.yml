@@ -12,8 +12,37 @@ on:
       - completed
 
 jobs:
-  test:
-    name: Test Micro Frontends
+  detect-changes:
+    name: Detect Changed Micro Frontends
+    runs-on: ubuntu-latest
+    outputs:
+      auth: ${{ steps.filter.outputs.auth }}
+      remote: ${{ steps.filter.outputs.remote }}
+      host: ${{ steps.filter.outputs.host }}
+      shared: ${{ steps.filter.outputs.shared }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check for File Changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            auth:
+              - 'auth-app/**'
+            remote:
+              - 'remote-app/**'
+            host:
+              - 'host-app/**'
+            shared:
+              - 'shared-ui/**'
+              - '.github/workflows/**'
+
+  test-auth-app:
+    name: Test Auth App
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.auth == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -32,12 +61,42 @@ jobs:
           npm install
           npm run lint
 
+  test-remote-app:
+    name: Test Remote App
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.remote == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Test Remote App
         run: |
           echo "Running tests & linting for Remote App..."
           cd remote-app
           npm install
           npm run lint
+
+  test-host-app:
+    name: Test Host App
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.host == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Test Host App
         run: |
@@ -48,7 +107,8 @@ jobs:
 
   build:
     name: Build Micro Frontends
-    needs: test
+    needs: [detect-changes, test-auth-app, test-remote-app, test-host-app]
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -61,6 +121,7 @@ jobs:
           node-version: 20
 
       - name: Build Auth App
+        if: ${{ needs.detect-changes.outputs.auth == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
         run: |
           echo "Building Auth App..."
           cd auth-app
@@ -69,6 +130,7 @@ jobs:
           echo "Auth App build completed successfully."
 
       - name: Build Remote App
+        if: ${{ needs.detect-changes.outputs.remote == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
         run: |
           echo "Building Remote App..."
           cd remote-app
@@ -77,6 +139,7 @@ jobs:
           echo "Remote App build completed successfully."
 
       - name: Build Host App
+        if: ${{ needs.detect-changes.outputs.host == 'true' || needs.detect-changes.outputs.shared == 'true' || github.event_name == 'workflow_dispatch' }}
         run: |
           echo "Building Host App..."
           cd host-app
@@ -85,4 +148,34 @@ jobs:
           echo "Host App build completed successfully."
 
       - name: Final Verification
-        run: echo "All micro-frontend tests and builds completed successfully!"
+        run: echo "All applicable micro-frontend builds completed successfully!"
+
+  deploy-staging:
+    name: Deploy to Staging Environment
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy Micro Frontends
+        run: |
+          echo "Deploying micro-frontends to staging environment..."
+          echo "Deployment triggered for ref: ${{ github.ref }} on event: ${{ github.event_name }}"
+
+  workflow-status:
+    name: Workflow Status Summary
+    needs: [detect-changes, test-auth-app, test-remote-app, test-host-app, build, deploy-staging]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Summary Execution Status
+        run: |
+          echo "=== Workflow Execution Summary ==="
+          echo "Trigger event: ${{ github.event_name }}"
+          echo "Branch/Ref: ${{ github.ref }}"
+          echo "Workflow execution completed."
+
